@@ -56,9 +56,10 @@ class TweetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+    $tweet = Tweet::find($id);
+    return response()->view('tweet.show', compact('tweet'));
     }
 
     /**
