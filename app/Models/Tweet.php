@@ -16,8 +16,13 @@ class Tweet extends Model
         'updated_at',
     ];
 
-      public static function getAllOrderByUpdated_at()
+    public static function getAllOrderByUpdated_at()
     {
         return self::orderBy('updated_at', 'desc')->get();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
