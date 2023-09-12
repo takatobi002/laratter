@@ -8,6 +8,7 @@ use App\Http\Controllers\TweetController;
 
 // 🔽 ここを編集
 Route::middleware('auth')->group(function () {
+  Route::get('/tweet/mypage', [TweetController::class, 'mydata'])->name('tweet.mypage');
   Route::resource('tweet', TweetController::class);
 });
 
