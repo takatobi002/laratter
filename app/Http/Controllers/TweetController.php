@@ -65,24 +65,40 @@ class TweetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+    $tweet = Tweet::find($id);
+    return response()->view('tweet.edit', compact('tweet'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+    //バリデーション
+    $validator = Validator::make($request->all(), [
+        'tweet' => 'required | max:191',
+        'description' => 'required',
+    ]);
+    //バリデーション:エラー
+    if ($validator->fails()) {
+        return redirect()
+        ->route('tweet.edit', $id)
+        ->withInput()
+        ->withErrors($validator);
+    }
+    //データ更新処理
+    $result = Tweet::find($id)->update($request->all());
+    return redirect()->route('tweet.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+    $result = Tweet::find($id)->delete();
+    return redirect()->route('tweet.index');
     }
 }
