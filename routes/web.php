@@ -6,7 +6,7 @@ use App\Http\Controllers\TweetController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\SearchController;
-
+use App\Http\Controllers\GoogleLoginController;
 
 
 // 🔽 ここを編集
@@ -36,5 +36,9 @@ Route::middleware('auth')->group(function () {
   Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('login.google');
+
+Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('login.google.callback');
 
 require __DIR__ . '/auth.php';

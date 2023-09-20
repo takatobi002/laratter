@@ -168,6 +168,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -182,7 +183,16 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
+
+    'services' => [
+        'google' => [
+            'client_id' => env('GOOGLE_CLIENT_ID'),
+            'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+            'redirect' => env('GOOGLE_REDIRECT_URL') ,
+        ],
+    ],
 
 ];
