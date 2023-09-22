@@ -42,3 +42,7 @@ Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->
 Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('login.google.callback');
 
 require __DIR__ . '/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
